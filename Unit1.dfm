@@ -1,10 +1,9 @@
 object Tlo: TTlo
-  Left = 303
-  Top = 243
-  BorderStyle = bsDialog
+  Left = 242
+  Top = 88
+  Width = 976
+  Height = 509
   Caption = 'Ping Pong'
-  ClientHeight = 470
-  ClientWidth = 960
   Color = clWindowFrame
   Font.Charset = DEFAULT_CHARSET
   Font.Color = clWindowText
@@ -14,6 +13,9 @@ object Tlo: TTlo
   OldCreateOrder = False
   OnKeyDown = FormKeyDown
   OnKeyUp = FormKeyUp
+  DesignSize = (
+    960
+    470)
   PixelsPerInch = 96
   TextHeight = 13
   object PaletkaPrawa: TImage
@@ -22,6 +24,7 @@ object Tlo: TTlo
     Width = 24
     Height = 222
     AutoSize = True
+    Enabled = False
     Picture.Data = {
       07544269746D6170A63E0000424DA63E00000000000036000000280000001800
       0000DE0000000100180000000000703E00000000000000000000000000000000
@@ -532,6 +535,7 @@ object Tlo: TTlo
     Width = 24
     Height = 222
     AutoSize = True
+    Enabled = False
     Picture.Data = {
       07544269746D6170A63E0000424DA63E00000000000036000000280000001800
       0000DE0000000100180000000000703E00000000000000000000000000000000
@@ -1037,8 +1041,8 @@ object Tlo: TTlo
       000000000000000000000000000000000000}
   end
   object Pilka: TImage
-    Left = 456
-    Top = 216
+    Left = 448
+    Top = 184
     Width = 32
     Height = 32
     AutoSize = True
@@ -1145,6 +1149,86 @@ object Tlo: TTlo
       FFFF}
     Transparent = True
   end
+  object Button1: TButton
+    Left = 312
+    Top = 344
+    Width = 297
+    Height = 73
+    Caption = 'Nowa Gra'
+    Font.Charset = DEFAULT_CHARSET
+    Font.Color = clWindowText
+    Font.Height = -21
+    Font.Name = 'MS Sans Serif'
+    Font.Style = []
+    ParentFont = False
+    TabOrder = 0
+    OnClick = Button1Click
+  end
+  object Text1: TEdit
+    Left = 296
+    Top = 16
+    Width = 353
+    Height = 40
+    Anchors = [akLeft, akTop, akRight]
+    Font.Charset = DEFAULT_CHARSET
+    Font.Color = clWindowText
+    Font.Height = -27
+    Font.Name = 'MS Sans Serif'
+    Font.Style = []
+    ParentFont = False
+    TabOrder = 1
+    Text = 'Zagrajmy w PingPonga!'
+  end
+  object Text2: TEdit
+    Left = 344
+    Top = 96
+    Width = 225
+    Height = 33
+    Anchors = []
+    BevelEdges = []
+    BiDiMode = bdLeftToRight
+    Font.Charset = DEFAULT_CHARSET
+    Font.Color = clWindowText
+    Font.Height = -21
+    Font.Name = 'MS Sans Serif'
+    Font.Style = []
+    ParentBiDiMode = False
+    ParentFont = False
+    TabOrder = 2
+    Text = 'Text2'
+    Visible = False
+  end
+  object Text3: TEdit
+    Left = 344
+    Top = 160
+    Width = 225
+    Height = 33
+    Font.Charset = DEFAULT_CHARSET
+    Font.Color = clWindowText
+    Font.Height = -21
+    Font.Name = 'MS Sans Serif'
+    Font.Style = []
+    ParentFont = False
+    TabOrder = 3
+    Text = 'Text3'
+    Visible = False
+  end
+  object Button2: TButton
+    Left = 312
+    Top = 232
+    Width = 297
+    Height = 81
+    Caption = 'Nastepna Runda'
+    Font.Charset = DEFAULT_CHARSET
+    Font.Color = clWindowText
+    Font.Height = -21
+    Font.Name = 'MS Sans Serif'
+    Font.Style = []
+    ParentFont = False
+    TabOrder = 4
+    Visible = False
+    OnClick = Button2Click
+  end
   object LewoGora: TTimer
     Enabled = False
     Interval = 20
@@ -1174,9 +1258,10 @@ object Tlo: TTlo
     Top = 64
   end
   object PilkaTimer: TTimer
+    Enabled = False
     Interval = 15
     OnTimer = PilkaTimerTimer
-    Left = 448
+    Left = 216
     Top = 24
   end
 end
