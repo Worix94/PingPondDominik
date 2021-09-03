@@ -9,6 +9,9 @@
 #pragma resource "*.dfm"
 TTlo *Tlo;
 int x=8,y=-5;
+int ilosc_odbic=0;
+int punkty_lewy=0;
+int punkty_prawy=0;
 //---------------------------------------------------------------------------
 __fastcall TTlo::TTlo(TComponent* Owner)
         : TForm(Owner)
@@ -67,17 +70,95 @@ void __fastcall TTlo::PilkaTimerTimer(TObject *Sender)
         if(Pilka->Top-5<0) y=-y;
         if(Pilka->Top+Pilka->Height+25>Tlo->Height) y=-y;
 
-        if(Pilka->Left<=PaletkaLewa->Left+PaletkaLewa->Width    &&
-        Pilka->Top-Pilka->Height/2>=PaletkaLewa->Top            &&
-        Pilka->Top+Pilka->Height/2<=PaletkaLewa->Top+PaletkaLewa->Height)
+        if(Pilka->Left < PaletkaLewa->Left)
         {
+                punkty_prawy++;
+                PilkaTimer->Enabled = false;
+                Pilka->Visible = false;
+                PaletkaLewa->Enabled = false;
+                PaletkaPrawa->Enabled = false;
+                Text1->Text = "Punkt dla gracza prawego >";
+                Text1->Visible = true;
+                Text2->Text = IntToStr(punkty_lewy) + ":" + IntToStr(punkty_prawy);
+                Text2->Visible = true;
+                Text3->Text = "Ilosc odbic: "+IntToStr(ilosc_odbic);
+                Text3->Visible = true;
+                Button1->Visible = true;
+                Button2->Visible = true;
+        }
+        if(Pilka->Left+Pilka->Width > PaletkaPrawa->Left+ PaletkaPrawa->Width)
+        {
+                 punkty_lewy++;
+                PilkaTimer->Enabled = false;
+                Pilka->Visible = false;
+                PaletkaLewa->Enabled = false;
+                PaletkaPrawa->Enabled = false;
+                Text1->Text = "Punkt dla gracza lewego <";
+                Text1->Visible = true;
+                Text2->Text = IntToStr(punkty_lewy) + ":" + IntToStr(punkty_prawy);
+                Text2->Visible = true;
+                Text3->Text = "Ilosc odbic: "+IntToStr(ilosc_odbic);
+                Text3->Visible = true;
+                Button1->Visible = true;
+                Button2->Visible = true;
+
+        }
+
+        if(Pilka->Left<=PaletkaLewa->Left+PaletkaLewa->Width    &&
+        Pilka->Top+Pilka->Height/2>=PaletkaLewa->Top            &&
+        Pilka->Top-Pilka->Height/2<=PaletkaLewa->Top+PaletkaLewa->Height)
+        {
+        ilosc_odbic++;
         x=-x;
         }
-        if(Pilka->Left+Pilka->Width<=PaletkaPrawa->Left                    &&
-        Pilka->Top-Pilka->Height/2>=PaletkaPrawa->Top                       &&
-        Pilka->Top+Pilka->Height/2<=PaletkaPrawa->Top+PaletkaPrawa->Height)
+        if(Pilka->Left+Pilka->Width>=PaletkaPrawa->Left                    &&
+        Pilka->Top+Pilka->Height/2>=PaletkaPrawa->Top                       &&
+        Pilka->Top-Pilka->Height/2<=PaletkaPrawa->Top+PaletkaPrawa->Height)
         {
+        ilosc_odbic++;
         x=-x;
         }
 }
 //---------------------------------------------------------------------------
+void __fastcall TTlo::Button1Click(TObject *Sender)
+{
+        Pilka->Left=440;
+        Pilka->Top=150;
+        x=8;
+        y=5;
+        Pilka->Visible = true;
+        PilkaTimer->Enabled = true;
+        PaletkaLewa->Enabled = true;
+        PaletkaPrawa->Enabled = true;
+        Button1->Visible = false;
+        Button2->Visible = false;
+        Text1->Visible = false;
+        Text2->Visible = false;
+        Text3->Visible = false;
+        ilosc_odbic=0;
+        punkty_prawy=0;
+        punkty_lewy=0;
+}
+//---------------------------------------------------------------------------
+
+void __fastcall TTlo::Button2Click(TObject *Sender)
+{
+ Pilka->Left=440;
+        Pilka->Top=150;
+        x=8;
+        y=5;
+        Pilka->Visible = true;
+        PilkaTimer->Enabled = true;
+        PaletkaLewa->Enabled = true;
+        PaletkaPrawa->Enabled = true;
+        Button1->Visible = false;
+        Button2->Visible = false;
+        Text1->Visible = false;
+        Text2->Visible = false;
+        Text3->Visible = false;
+        ilosc_odbic=0;
+
+}
+//---------------------------------------------------------------------------
+
+

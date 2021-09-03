@@ -21,6 +21,11 @@ __published:	// IDE-managed Components
         TTimer *PrawoDol;
         TImage *Pilka;
         TTimer *PilkaTimer;
+        TButton *Button1;
+        TEdit *Text1;
+        TEdit *Text2;
+        TEdit *Text3;
+        TButton *Button2;
         void __fastcall LewoGoraTimer(TObject *Sender);
         void __fastcall LewoDolTimer(TObject *Sender);
         void __fastcall FormKeyDown(TObject *Sender, WORD &Key,
@@ -30,6 +35,8 @@ __published:	// IDE-managed Components
         void __fastcall PrawoGoraTimer(TObject *Sender);
         void __fastcall PrawoDolTimer(TObject *Sender);
         void __fastcall PilkaTimerTimer(TObject *Sender);
+        void __fastcall Button1Click(TObject *Sender);
+        void __fastcall Button2Click(TObject *Sender);
 private:	// User declarations
 public:		// User declarations
         __fastcall TTlo(TComponent* Owner);
