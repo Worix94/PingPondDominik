@@ -1,8 +1,8 @@
 object Tlo: TTlo
-  Left = 242
-  Top = 88
-  Width = 976
-  Height = 509
+  Left = 214
+  Top = 127
+  Width = 978
+  Height = 516
   Caption = 'Ping Pong'
   Color = clWindowFrame
   Font.Charset = DEFAULT_CHARSET
@@ -11,16 +11,14 @@ object Tlo: TTlo
   Font.Name = 'MS Sans Serif'
   Font.Style = []
   OldCreateOrder = False
+  OnCreate = FormCreate
   OnKeyDown = FormKeyDown
   OnKeyUp = FormKeyUp
-  DesignSize = (
-    960
-    470)
   PixelsPerInch = 96
   TextHeight = 13
   object PaletkaPrawa: TImage
     Left = 912
-    Top = 120
+    Top = 112
     Width = 24
     Height = 222
     AutoSize = True
@@ -1042,7 +1040,7 @@ object Tlo: TTlo
   end
   object Pilka: TImage
     Left = 448
-    Top = 184
+    Top = 192
     Width = 32
     Height = 32
     AutoSize = True
@@ -1165,11 +1163,10 @@ object Tlo: TTlo
     OnClick = Button1Click
   end
   object Text1: TEdit
-    Left = 296
-    Top = 16
+    Left = 295
+    Top = 15
     Width = 353
     Height = 40
-    Anchors = [akLeft, akTop, akRight]
     Font.Charset = DEFAULT_CHARSET
     Font.Color = clWindowText
     Font.Height = -27
@@ -1181,10 +1178,9 @@ object Tlo: TTlo
   end
   object Text2: TEdit
     Left = 344
-    Top = 96
+    Top = 88
     Width = 225
     Height = 33
-    Anchors = []
     BevelEdges = []
     BiDiMode = bdLeftToRight
     Font.Charset = DEFAULT_CHARSET
@@ -1200,7 +1196,7 @@ object Tlo: TTlo
   end
   object Text3: TEdit
     Left = 344
-    Top = 160
+    Top = 152
     Width = 225
     Height = 33
     Font.Charset = DEFAULT_CHARSET

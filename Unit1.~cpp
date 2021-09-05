@@ -20,15 +20,17 @@ __fastcall TTlo::TTlo(TComponent* Owner)
 //---------------------------------------------------------------------------
 
 
+
+
 void __fastcall TTlo::LewoGoraTimer(TObject *Sender)
 {
-        if(PaletkaLewa->Top>0)PaletkaLewa->Top-= 10;
+        if(PaletkaLewa->Top>5)PaletkaLewa->Top-= 10;
 }
 //---------------------------------------------------------------------------
 
 void __fastcall TTlo::LewoDolTimer(TObject *Sender)
 {
-        if(PaletkaLewa->Top+PaletkaLewa->Height < Tlo->Height-30) PaletkaLewa->Top += 10;
+        if(PaletkaLewa->Top+PaletkaLewa->Height < Tlo->Height-40) PaletkaLewa->Top += 10;
 }
 //---------------------------------------------------------------------------
 
@@ -54,12 +56,12 @@ void __fastcall TTlo::FormKeyUp(TObject *Sender, WORD &Key,
 
 void __fastcall TTlo::PrawoGoraTimer(TObject *Sender)
 {
-       if(PaletkaPrawa->Top>0)PaletkaPrawa->Top-= 10;
+       if(PaletkaPrawa->Top>5)PaletkaPrawa->Top-= 10;
 }
 //---------------------------------------------------------------------------
 void __fastcall TTlo::PrawoDolTimer(TObject *Sender)
 {
-      if(PaletkaPrawa->Top+PaletkaPrawa->Height < Tlo->Height-30) PaletkaPrawa->Top += 10;
+      if(PaletkaPrawa->Top+PaletkaPrawa->Height < Tlo->Height-40) PaletkaPrawa->Top += 10;
 }
 //---------------------------------------------------------------------------
 void __fastcall TTlo::PilkaTimerTimer(TObject *Sender)
@@ -70,6 +72,36 @@ void __fastcall TTlo::PilkaTimerTimer(TObject *Sender)
         if(Pilka->Top-5<0) y=-y;
         if(Pilka->Top+Pilka->Height+25>Tlo->Height) y=-y;
 
+        if(Pilka->Left<=PaletkaLewa->Left+PaletkaLewa->Width    &&
+        Pilka->Top+Pilka->Height/2>=PaletkaLewa->Top*0.75            &&
+        Pilka->Top-Pilka->Height/2<=(PaletkaLewa->Top+PaletkaLewa->Height)*0.75)
+        {
+        ilosc_odbic++;
+        x=-1.2*x;
+        y=1.2*y;
+        }
+        else if(Pilka->Left+Pilka->Width>=PaletkaPrawa->Left                    &&
+        Pilka->Top+Pilka->Height/2>=PaletkaPrawa->Top*0.75                     &&
+        Pilka->Top-Pilka->Height/2<=(PaletkaPrawa->Top+PaletkaPrawa->Height)*0.75 )
+        {
+        ilosc_odbic++;
+        x=-1.2*x;
+        y=1.2*y;
+        }
+        else if(Pilka->Left<=PaletkaLewa->Left+PaletkaLewa->Width    &&
+        Pilka->Top+Pilka->Height/2>=PaletkaLewa->Top                 &&
+        Pilka->Top-Pilka->Height/2<=PaletkaLewa->Top+PaletkaLewa->Height)
+        {
+        ilosc_odbic++;
+        x=-x;
+        }
+        else if(Pilka->Left+Pilka->Width>=PaletkaPrawa->Left                    &&
+        Pilka->Top+Pilka->Height/2>=PaletkaPrawa->Top                       &&
+        Pilka->Top-Pilka->Height/2<=PaletkaPrawa->Top+PaletkaPrawa->Height)
+        {
+        ilosc_odbic++;
+        x=-x;
+        }
         if(Pilka->Left < PaletkaLewa->Left)
         {
                 punkty_prawy++;
@@ -85,6 +117,8 @@ void __fastcall TTlo::PilkaTimerTimer(TObject *Sender)
                 Text3->Visible = true;
                 Button1->Visible = true;
                 Button2->Visible = true;
+                Tlo->BorderStyle =bsSizeable;
+
         }
         if(Pilka->Left+Pilka->Width > PaletkaPrawa->Left+ PaletkaPrawa->Width)
         {
@@ -101,23 +135,9 @@ void __fastcall TTlo::PilkaTimerTimer(TObject *Sender)
                 Text3->Visible = true;
                 Button1->Visible = true;
                 Button2->Visible = true;
-
+                Tlo->BorderStyle =bsSizeable;
         }
 
-        if(Pilka->Left<=PaletkaLewa->Left+PaletkaLewa->Width    &&
-        Pilka->Top+Pilka->Height/2>=PaletkaLewa->Top            &&
-        Pilka->Top-Pilka->Height/2<=PaletkaLewa->Top+PaletkaLewa->Height)
-        {
-        ilosc_odbic++;
-        x=-x;
-        }
-        if(Pilka->Left+Pilka->Width>=PaletkaPrawa->Left                    &&
-        Pilka->Top+Pilka->Height/2>=PaletkaPrawa->Top                       &&
-        Pilka->Top-Pilka->Height/2<=PaletkaPrawa->Top+PaletkaPrawa->Height)
-        {
-        ilosc_odbic++;
-        x=-x;
-        }
 }
 //---------------------------------------------------------------------------
 void __fastcall TTlo::Button1Click(TObject *Sender)
@@ -138,6 +158,10 @@ void __fastcall TTlo::Button1Click(TObject *Sender)
         ilosc_odbic=0;
         punkty_prawy=0;
         punkty_lewy=0;
+
+        PaletkaPrawa->Left = Tlo->Width-70;
+        Tlo->BorderStyle =bsDialog;
+
 }
 //---------------------------------------------------------------------------
 
@@ -158,7 +182,24 @@ void __fastcall TTlo::Button2Click(TObject *Sender)
         Text3->Visible = false;
         ilosc_odbic=0;
 
+        PaletkaPrawa->Left = Tlo->Width-70;
+        Tlo->BorderStyle =bsDialog;
+
 }
 //---------------------------------------------------------------------------
 
+
+
+void __fastcall TTlo::FormCreate(TObject *Sender)
+{
+    Application->MessageBox("Witaj w grze ping pong.\n\n"
+    "Lewy gracz steruje wciskaj¹c klawisze A oraz Z.\n"
+    "Prawy gracz steruje wciskaj¹c strza³ki do góry i w dó³. \n\n"
+    "Dla urozmaicenia zabawy:\n"
+    "Kiedy odbijesz pi³kê na srodku paletki, wówczas zmienisz jej k¹t odbicia i pi³ka przyspieszy.\n"
+    "Im d³u¿ej odbijasz, tym pi³ka szybciej przemieszcza siê.\n"
+    "Mo¿esz dowolnie zmienia pole gry.\n\n"
+    "Mi³ej zabawy!", MB_OK);
+}
+//---------------------------------------------------------------------------
 
