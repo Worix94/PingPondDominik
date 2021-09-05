@@ -161,6 +161,8 @@ void __fastcall TTlo::Button1Click(TObject *Sender)
 
         PaletkaPrawa->Left = Tlo->Width-70;
         Tlo->BorderStyle =bsDialog;
+        PaletkaLewa->Top= 112;
+        PaletkaPrawa->Top= 112;
 
 }
 //---------------------------------------------------------------------------
@@ -182,6 +184,8 @@ void __fastcall TTlo::Button2Click(TObject *Sender)
         Text3->Visible = false;
         ilosc_odbic=0;
 
+        PaletkaLewa->Top= 112;
+        PaletkaPrawa->Top= 112;
         PaletkaPrawa->Left = Tlo->Width-70;
         Tlo->BorderStyle =bsDialog;
 
